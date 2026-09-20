@@ -191,7 +191,7 @@
   .gigs { list-style: none; margin-top: 1.5rem; border-top: 2px solid var(--ink); }
   .gig {
     display: grid;
-    grid-template-columns: 8.5rem 1fr auto;
+    grid-template-columns: 12rem 1fr;
     gap: 1rem 1.5rem;
     align-items: center;
     padding: 1.1rem 0;
@@ -200,9 +200,6 @@
   .gig-date { font-weight: 700; }
   .gig-place { font-weight: 500; }
   .gig-place small { display: block; font-weight: 400; opacity: 0.75; }
-  .pill { font-size: 0.85rem; font-weight: 600; padding: 0.2rem 0.85rem; border-radius: 999px; white-space: nowrap; color: var(--cream); }
-  .pill-egen { background: var(--rust); }
-  .pill-cover { background: var(--teal); }
   .no-gigs { padding: 1.25rem 0; }
 
   /* Om oss */
@@ -266,8 +263,7 @@
     .banner .wrap { justify-content: flex-start; }
     .banner .link { padding: 0.5rem 0.8rem; font-size: 0.92rem; }
     .two-col { grid-template-columns: 1fr; }
-    .gig { grid-template-columns: 1fr auto; }
-    .gig-date { grid-column: 1 / -1; }
+    .gig { grid-template-columns: 1fr; gap: 0.15rem; }
     section { padding: 4rem 0; }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -377,10 +373,9 @@ const SITE = {
   ],
 };
 
-// type: "egen" (egen spelning) eller "cover" (kalas/pub)
 const GIGS = [
-  { date: "2026-10-10", place: "Redbrick Pub", town: "", type: "cover" },
-  { date: "2026-12-04", place: "Redbrick Pub", town: "", type: "cover" },
+  { date: "2026-10-10", place: "Redbrick Pub", town: "" },
+  { date: "2026-12-04", place: "Redbrick Pub", town: "" },
 ];
 
 const MEMBERS = [
@@ -435,8 +430,6 @@ if (upcoming.length === 0) {
     const place = make("span", "gig-place", g.place);
     if (g.town) place.appendChild(make("small", "", g.town));
     li.appendChild(place);
-    li.appendChild(make("span", "pill " + (g.type === "egen" ? "pill-egen" : "pill-cover"),
-      g.type === "egen" ? "Egen spelning" : "Kalas och pub"));
     list.appendChild(li);
   });
 }
