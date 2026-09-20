@@ -229,7 +229,8 @@
 
   /* ---------- Responsivt ---------- */
   @media (max-aspect-ratio: 1/1) {
-    /* Stående skärm: hela omslaget syns i bredd, skivan snurrar uppe i himlen */
+    /* Stående skärm: hela omslaget syns i bredd. Skivan får plats i himlen ovanför,
+       och storleken räknas ut så att den aldrig når loggan. */
     .hero {
       background:
         linear-gradient(#E76E13, rgba(231,110,19,0)) left 0 bottom calc(100vw - 70px) / 100% 70px no-repeat,
@@ -237,10 +238,27 @@
         #E76E13;
     }
     .record {
-      --d: min(74vw, 40vh);
+      --sky: calc(100vh - var(--banner-h) - 100vw);
+      --d: min(74vw, max(0px, calc(var(--sky) - 48px)));
       right: auto; bottom: auto;
       left: calc(50% - var(--d) / 2);
-      top: 7%;
+      top: calc(var(--sky) / 2 - var(--d) / 2);
+    }
+    @supports (height: 100svh) {
+      .record {
+        --sky: calc(100svh - var(--banner-h) - 100vw);
+        --d: min(74vw, max(0px, calc(var(--sky) - 48px)));
+      }
+    }
+  }
+  @media (min-aspect-ratio: 5/8) and (max-aspect-ratio: 1/1) {
+    /* Kortare eller bredare stående skärm (t.ex. liten telefon med verktygsfält, surfplatta):
+       ingen plats i himlen, så skivan ligger nere i hörnet över vägen, långt från loggan. */
+    .record {
+      --d: 52vw;
+      left: auto; top: auto;
+      right: -14vw;
+      bottom: -12vw;
     }
   }
   @media (max-width: 820px) {
@@ -285,7 +303,7 @@
         <span class="side-tag">A-sidan</span>
         <h2 id="a-rubrik">Våra egna låtar</h2>
         <p>Vi skriver soulrock på svenska med texter om det som faktiskt händer: jobb som är jobbigt, kärlek som kommer och går och kvällar som blir längre och blötare än nödvändigt. Helt enkelt musik om livet.</p>
-        <p>Trummor och bas som svänger som norska landsvägar, gitarrer som riffar och stökar, blås som flåsar och stånkar en i örat och sång som kvider.</p>
+        <p>Trummor och bas som svänger norska landsvägar, gitarrer som riffar och stökar, blås som flåsar och stånkar en i örat och sång som kvider.</p>
         <a class="btn btn-solid" id="streaming-link" href="#" hidden>Lyssna där du brukar lyssna</a>
       </div>
       <div class="embed" id="music-embed"></div>
