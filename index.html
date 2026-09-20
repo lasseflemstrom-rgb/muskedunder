@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Muskedunder – soulrock på svenska och kalasmusik</title>
+<meta name="description" content="Muskedunder spelar svängig soulrock på svenska med vardagliga texter om livet. Vi spelar också covergig på kalas och pubkvällar.">
+<meta property="og:title" content="Muskedunder">
+<meta property="og:description" content="Svängig soulrock på svenska. Covergig på kalas och pubkvällar.">
+<meta property="og:image" content="cover.jpg">
+<link rel="icon" href="cover.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lobster&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Färger hämtade från omslaget */
+    --sun: #F29A16;
+    --orange: #EC7A12;
+    --rust: #B5321C;
+    --teal: #1F6B72;
+    --teal-deep: #143F47;
+    --cream: #F6E7C1;
+    --sand: #F2B640;
+    --ink: #1A1412;
+    --display: "Lobster", "Georgia", cursive;
+    --body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--body);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--ink);
+    background: var(--cream);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 4px; }
+  #b-sida :focus-visible, #om-oss :focus-visible { outline-color: var(--cream); }
+  .wrap { width: min(1080px, 100% - 2.5rem); margin-inline: auto; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* ---------- Hero: bakgrundsbild och skiva över hela skärmen ---------- */
+  :root { --banner-h: 66px; }
+  html { scroll-padding-top: var(--banner-h); }
+  .hero {
+    position: relative;
+    overflow: hidden;
+    height: calc(100vh - var(--banner-h));
+    height: calc(100svh - var(--banner-h));
+    min-height: 420px;
+    background: url("cover.jpg") 50% 35% / cover no-repeat, var(--orange);
+  }
+  .record {
+    --d: min(72vh, 48vw);
+    position: absolute; z-index: 1;
+    width: var(--d);
+    aspect-ratio: 1;
+    right: calc(var(--d) * -0.24);
+    bottom: calc(var(--d) * -0.34);
+    border-radius: 50%;
+    background: repeating-radial-gradient(circle, #150d0b 0 2px, #241612 2px 4px);
+    box-shadow: 0 14px 40px rgba(26,20,18,0.5);
+    animation: spin 12s linear infinite;
+  }
+  .record::before { /* ljusreflex */
+    content: "";
+    position: absolute; inset: 0; border-radius: 50%;
+    background: conic-gradient(from 20deg, transparent 0 20%, rgba(255,255,255,0.1) 25%, transparent 32% 70%, rgba(255,255,255,0.08) 76%, transparent 84%);
+  }
+  .record .label {
+    position: absolute; inset: 31%;
+    border-radius: 50%;
+    background: url("cover.jpg") 50% 83% / 300% auto no-repeat, var(--sand);
+    box-shadow: 0 0 0 3px var(--cream) inset;
+  }
+  .record .label::after {
+    content: ""; position: absolute; left: 50%; top: 50%;
+    width: 9%; aspect-ratio: 1; transform: translate(-50%, -50%);
+    border-radius: 50%; background: var(--orange);
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ---------- Banner med länkar (fastnar överst när man scrollar) ---------- */
+  .banner {
+    position: sticky; top: 0; z-index: 20;
+    height: var(--banner-h);
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .banner::before { /* vägmarkeringarna från omslaget */
+    content: "";
+    position: absolute; inset: 0 0 auto 0; height: 6px;
+    background: repeating-linear-gradient(90deg,
+      var(--teal) 0 48px, var(--cream) 48px 54px,
+      var(--sand) 54px 102px, var(--rust) 102px 108px);
+  }
+  .banner .wrap {
+    height: 100%;
+    padding-top: 6px;
+    display: flex; align-items: center; justify-content: space-between; gap: 1.5rem;
+  }
+  .banner-logo { font-family: var(--display); font-size: 1.7rem; color: var(--sand); text-decoration: none; white-space: nowrap; }
+  .banner ul { list-style: none; display: flex; align-items: center; gap: 0.35rem; overflow-x: auto; scrollbar-width: none; }
+  .banner ul::-webkit-scrollbar { display: none; }
+  .banner .link {
+    display: block; white-space: nowrap;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    font-weight: 600; font-size: 0.97rem;
+    text-decoration: none;
+    color: var(--cream);
+    transition: background 0.15s, color 0.15s;
+  }
+  .banner .link:hover { background: rgba(246,231,193,0.16); }
+  .banner .link-a { background: var(--sand); color: var(--ink); }
+  .banner .link-a:hover { background: var(--cream); }
+  .banner .link-b { background: var(--teal); color: var(--cream); }
+  .banner .link-b:hover { background: #2B8790; }
+  .banner :focus-visible { outline-color: var(--cream); }
+
+  /* ---------- Knappar ---------- */
+  .btn {
+    display: inline-block;
+    padding: 0.85rem 1.5rem;
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid var(--ink);
+    transition: background 0.15s, color 0.15s;
+  }
+  .btn-solid { background: var(--ink); color: var(--cream); }
+  .btn-solid:hover { background: var(--rust); border-color: var(--rust); }
+
+  /* ---------- Sektioner ---------- */
+  section { padding: 5.5rem 0; }
+  h2 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(2.3rem, 6vw, 3.7rem);
+    line-height: 1.05;
+    margin-bottom: 1.25rem;
+  }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 5vw, 4rem); align-items: start; }
+  .prose p { max-width: 60ch; margin-bottom: 1rem; }
+
+  .side-tag {
+    display: inline-block;
+    font-family: var(--display);
+    font-size: 1.15rem;
+    background: var(--ink);
+    color: var(--sand);
+    padding: 0.15rem 1.1rem;
+    border-radius: 999px;
+    margin-bottom: 1rem;
+  }
+
+  /* A-sidan */
+  #a-sida { background: var(--cream); }
+  .embed {
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--teal-deep);
+    color: var(--cream);
+    min-height: 352px;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: 1.5rem;
+  }
+  .embed iframe { width: 100%; height: 352px; border: 0; display: block; }
+
+  /* B-sidan */
+  #b-sida { background: var(--teal); color: var(--cream); }
+  #b-sida .side-tag { background: var(--cream); color: var(--teal-deep); }
+  .occasions { list-style: none; margin: 1.25rem 0 0; display: grid; gap: 0.6rem; }
+  .occasions li {
+    padding: 0.8rem 1.1rem;
+    background: rgba(20,63,71,0.6);
+    border-left: 5px solid var(--sand);
+    border-radius: 0 10px 10px 0;
+    font-weight: 500;
+  }
+  .btn-on-teal { background: var(--sand); color: var(--ink); border-color: var(--sand); }
+  .btn-on-teal:hover { background: var(--cream); border-color: var(--cream); }
+
+  /* Spelningar */
+  #spelningar { background: var(--cream); }
+  .gigs { list-style: none; margin-top: 1.5rem; border-top: 2px solid var(--ink); }
+  .gig {
+    display: grid;
+    grid-template-columns: 8.5rem 1fr auto;
+    gap: 1rem 1.5rem;
+    align-items: center;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid rgba(26,20,18,0.25);
+  }
+  .gig-date { font-weight: 700; }
+  .gig-place { font-weight: 500; }
+  .gig-place small { display: block; font-weight: 400; opacity: 0.75; }
+  .pill { font-size: 0.85rem; font-weight: 600; padding: 0.2rem 0.85rem; border-radius: 999px; white-space: nowrap; color: var(--cream); }
+  .pill-egen { background: var(--rust); }
+  .pill-cover { background: var(--teal); }
+  .no-gigs { padding: 1.25rem 0; }
+
+  /* Om oss */
+  #om-oss { background: var(--rust); color: var(--cream); }
+  #om-oss h2 { color: var(--sand); }
+  .members { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1rem; margin-top: 2rem; }
+  .member { background: rgba(26,20,18,0.28); border-radius: 12px; padding: 1.25rem; }
+  .member strong { display: block; font-family: var(--display); font-weight: 400; font-size: 1.4rem; color: var(--sand); }
+
+  /* Kontakt */
+  #kontakt { background: var(--sun); }
+  .contact-links { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-top: 1.5rem; }
+  .btn-outline-dark { color: var(--ink); }
+  .btn-outline-dark:hover { background: var(--ink); color: var(--sand); }
+
+  /* Vägmarkeringarna från omslaget */
+  .stripes {
+    height: 34px;
+    background: repeating-linear-gradient(90deg,
+      var(--teal-deep) 0 60px, var(--cream) 60px 68px,
+      var(--teal) 68px 128px, var(--sand) 128px 136px);
+  }
+  footer { background: var(--ink); color: var(--cream); padding: 1.75rem 0; font-size: 0.95rem; }
+
+  /* ---------- Responsivt ---------- */
+  @media (max-aspect-ratio: 1/1) {
+    /* Stående skärm: hela omslaget syns i bredd, skivan snurrar uppe i himlen */
+    .hero {
+      background:
+        linear-gradient(#E76E13, rgba(231,110,19,0)) left 0 bottom calc(100vw - 70px) / 100% 70px no-repeat,
+        url("cover.jpg") 50% 100% / 100% auto no-repeat,
+        #E76E13;
+    }
+    .record {
+      --d: min(74vw, 40vh);
+      right: auto; bottom: auto;
+      left: calc(50% - var(--d) / 2);
+      top: 7%;
+    }
+  }
+  @media (max-width: 820px) {
+    .banner-logo { display: none; }
+    .banner .wrap { justify-content: flex-start; }
+    .banner .link { padding: 0.5rem 0.8rem; font-size: 0.92rem; }
+    .two-col { grid-template-columns: 1fr; }
+    .gig { grid-template-columns: 1fr auto; }
+    .gig-date { grid-column: 1 / -1; }
+    section { padding: 4rem 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .record { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<main id="top">
+  <div class="hero">
+    <h1 class="sr-only">Muskedunder: svängig soulrock på svenska och covers till kalas och pub</h1>
+    <div class="record" aria-hidden="true"><div class="label"></div></div>
+  </div>
+
+  <nav class="banner" aria-label="Huvudmeny">
+    <div class="wrap">
+      <a class="banner-logo" href="#top">Muskedunder</a>
+      <ul>
+        <li><a class="link link-a" href="#a-sida">Egna låtar</a></li>
+        <li><a class="link link-b" href="#b-sida">Kalas och pub</a></li>
+        <li><a class="link" href="#spelningar">Spelningar</a></li>
+        <li><a class="link" href="#om-oss">Om oss</a></li>
+        <li><a class="link" href="#kontakt">Kontakt</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section id="a-sida" aria-labelledby="a-rubrik">
+    <div class="wrap two-col">
+      <div class="prose">
+        <span class="side-tag">A-sidan</span>
+        <h2 id="a-rubrik">Våra egna låtar</h2>
+        <p>Vi skriver soulrock på svenska med texter om det som faktiskt händer: jobb som är jobbigt, kärlek som kommer och går och kvällar som blir längre och blötare än nödvändigt. Helt enkelt musik om livet.</p>
+        <p>Trummor och bas som svänger som norska landsvägar, gitarrer som riffar och stökar, blås som flåsar och stånkar en i örat och sång som kvider.</p>
+        <a class="btn btn-solid" id="streaming-link" href="#" hidden>Lyssna där du brukar lyssna</a>
+      </div>
+      <div class="embed" id="music-embed"></div>
+    </div>
+  </section>
+
+  <section id="b-sida" aria-labelledby="b-rubrik">
+    <div class="wrap two-col">
+      <div class="prose">
+        <span class="side-tag">B-sidan</span>
+        <h2 id="b-rubrik">Covergig</h2>
+        <p>Behöver ni ett band som får folk att sjunga med? Vi spelar låtar alla kan, i en sättning som funkar både på en pubscen och i en festlokal.</p>
+        <a class="btn btn-on-teal" href="#kontakt">Fråga om ett datum</a>
+      </div>
+      <div>
+        <p><strong>Vi spelar bland annat på</strong></p>
+        <ul class="occasions">
+          <li>Kalas och födelsedagar</li>
+          <li>Pubkvällar och barer</li>
+          <li>Företagsfester och föreningsfester</li>
+          <li>Bröllop och andra stora tillfällen</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="spelningar" aria-labelledby="s-rubrik">
+    <div class="wrap">
+      <h2 id="s-rubrik">Kommande spelningar</h2>
+      <ul class="gigs" id="gig-list"></ul>
+    </div>
+  </section>
+
+  <section id="om-oss" aria-labelledby="o-rubrik">
+    <div class="wrap">
+      <h2 id="o-rubrik">Om oss</h2>
+      <div class="prose">
+        <p>Muskedunder är ett band med två sidor. Vi skriver och släpper egen musik, och vi spelar covers för folk som vill ha en bra kväll. Det är samma gäng på scenen i båda fallen.</p>
+      </div>
+      <ul class="members" id="member-list"></ul>
+    </div>
+  </section>
+
+  <section id="kontakt" aria-labelledby="k-rubrik">
+    <div class="wrap">
+      <h2 id="k-rubrik">Boka eller hör av dig</h2>
+      <div class="prose">
+        <p>Berätta datum, plats och vad det gäller, så svarar vi så fort vi kan.</p>
+      </div>
+      <div class="contact-links" id="contact-links"></div>
+    </div>
+  </section>
+</main>
+
+<div class="stripes" aria-hidden="true"></div>
+<footer>
+  <div class="wrap">© <span id="year"></span> Muskedunder</div>
+</footer>
+
+<script>
+/* ==========================================================
+   Redigera bara här. Resten av filen behöver du inte röra.
+   ========================================================== */
+const SITE = {
+  email: "lasseflemstrom@gmail.com",
+  spotifyEmbedUrl: "https://open.spotify.com/embed/artist/6cUqR0L0f8lQ7eXUPMABGy",
+  streamingLink: "https://open.spotify.com/artist/6cUqR0L0f8lQ7eXUPMABGy",
+  social: [
+    // { label: "Instagram", url: "https://instagram.com/..." },
+    // { label: "Facebook",  url: "https://facebook.com/..." },
+  ],
+};
+
+// type: "egen" (egen spelning) eller "cover" (kalas/pub)
+const GIGS = [
+  { date: "2026-10-10", place: "Redbrick Pub", town: "", type: "cover" },
+  { date: "2026-12-04", place: "Redbrick Pub", town: "", type: "cover" },
+];
+
+const MEMBERS = [
+  { name: "Lars Flemström", role: "Sång och gitarr" },
+  { name: "Björn Eklund", role: "Trummor och sång" },
+  { name: "Filip Strand", role: "Bas" },
+];
+/* ========================================================== */
+
+const el = id => document.getElementById(id);
+const make = (tag, cls, text) => {
+  const n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text) n.textContent = text;
+  return n;
+};
+
+// Musik
+const embed = el("music-embed");
+if (SITE.spotifyEmbedUrl) {
+  const f = document.createElement("iframe");
+  f.src = SITE.spotifyEmbedUrl;
+  f.title = "Muskedunder på Spotify";
+  f.loading = "lazy";
+  f.allow = "encrypted-media";
+  embed.style.padding = "0";
+  embed.appendChild(f);
+} else {
+  embed.appendChild(make("p", "", "Vår musik läggs upp här snart."));
+}
+if (SITE.streamingLink) {
+  const a = el("streaming-link");
+  a.href = SITE.streamingLink;
+  a.hidden = false;
+}
+
+// Spelningar (visar bara kommande datum)
+const list = el("gig-list");
+const today = new Date(); today.setHours(0, 0, 0, 0);
+const upcoming = GIGS
+  .filter(g => new Date(g.date + "T00:00:00") >= today)
+  .sort((a, b) => a.date.localeCompare(b.date));
+
+if (upcoming.length === 0) {
+  list.appendChild(make("li", "no-gigs", "Inga spelningar inlagda just nu. Vill du boka oss? Hör av dig nedan."));
+} else {
+  upcoming.forEach(g => {
+    const li = make("li", "gig");
+    const d = new Date(g.date + "T00:00:00");
+    li.appendChild(make("span", "gig-date",
+      d.toLocaleDateString("sv-SE", { weekday: "short", day: "numeric", month: "long" })));
+    const place = make("span", "gig-place", g.place);
+    if (g.town) place.appendChild(make("small", "", g.town));
+    li.appendChild(place);
+    li.appendChild(make("span", "pill " + (g.type === "egen" ? "pill-egen" : "pill-cover"),
+      g.type === "egen" ? "Egen spelning" : "Kalas och pub"));
+    list.appendChild(li);
+  });
+}
+
+// Medlemmar
+MEMBERS.forEach(m => {
+  const li = make("li", "member");
+  li.appendChild(make("strong", "", m.name));
+  li.appendChild(make("span", "", m.role));
+  el("member-list").appendChild(li);
+});
+
+// Kontakt
+const contact = el("contact-links");
+const mail = make("a", "btn btn-solid", "Mejla oss");
+mail.href = "mailto:" + SITE.email;
+contact.appendChild(mail);
+SITE.social.forEach(s => {
+  const a = make("a", "btn btn-outline-dark", s.label);
+  a.href = s.url; a.target = "_blank"; a.rel = "noopener";
+  contact.appendChild(a);
+});
+
+el("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
